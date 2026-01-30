@@ -44,6 +44,11 @@
                         <!-- RIGHT -->
                         <form class="contact__form" id="contactForm" action="https://formspree.io/f/XXXXYYYY"
                             method="POST" novalidate>
+                            
+                            <input type="hidden" name="_subject"
+                                value="Formularz kontaktowy – Kancelaria Brunon Woźniak" />
+                            <input type="hidden" name="_template" value="table" />
+
                             <div class="form__group">
                                 <label for="name">Imię i nazwisko</label>
                                 <input type="text" id="name" name="name" autocomplete="name" required />
@@ -56,7 +61,7 @@
 
                             <div class="form__group">
                                 <label for="message">Wiadomość</label>
-                                <textarea id="message" name="message" rows="6" required></textarea>
+                                <textarea id="message" name="message" rows="15" required></textarea>
                             </div>
 
                             <div class="form__consent">
