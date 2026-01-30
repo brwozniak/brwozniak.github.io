@@ -1,0 +1,73 @@
+.container{
+    width: min(var(--container), calc(100% - 2*var(--space-4)));
+    margin-inline: auto;
+  }
+
+  :root{
+    --bottom-fade: clamp(80px, 12vh, 140px); /* Twoja krótsza wersja */
+  }
+  
+  main{
+    position: relative;
+    padding-bottom: calc(var(--bottom-fade) + var(--space-6)); /* klucz: content nie wchodzi w gradient */
+  }
+  
+  main::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  
+    height: clamp(80px, 12vh, 140px);
+    pointer-events: none;
+    z-index: 0;
+  
+    background: linear-gradient(
+      to top,
+      rgba(0,63,34,1.00) 0%,
+      rgba(0,63,34,0.92) 10%,
+      rgba(0,63,34,0.84) 20%,
+      rgba(0,63,34,0.72) 32%,
+      rgba(0,63,34,0.58) 45%,
+      rgba(0,63,34,0.42) 60%,
+      rgba(0,63,34,0.26) 74%,
+      rgba(0,63,34,0.14) 86%,
+      rgba(0,63,34,0.06) 94%,
+      rgba(0,63,34,0.00) 100%
+    );
+  }
+
+  main > *{
+  position: relative;
+  z-index: 1;
+}
+
+  .container--header{
+    width: 100%;
+    margin: 0;
+    padding-left: var(--space-3);   /* 16px – subtelny, ale czytelny */
+    padding-right: var(--space-4);  /* zostaw jak było */
+  }
+
+  .section{
+    padding: var(--space-6) 0;
+  }
+  
+  .section--alt{
+    padding-top: 0;
+  }
+  
+  .two-col{
+    display: grid;
+    gap: var(--space-5);
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+  }
+  
+  @media (max-width: 900px){
+    .two-col{
+      grid-template-columns: 1fr;
+    }
+  }
+  
