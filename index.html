@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Kancelaria Brunon Wozniak</title>
+    <title>Kancelaria Brunon Woźniak</title>
 
     <link rel="icon" href="assets/icons/favicon.ico" />
     <link rel="stylesheet" href="css/tokens.css" />
@@ -19,135 +19,140 @@
     <main>
         <section class="section section--hero">
             <div class="container">
-                <div class="two-col">
+                <!-- HERO: name + motto + image -->
+                <div class="two-col two-col--hero">
                     <div class="two-col__content">
-                        <h2 class="h2">Adwokat</h2>
-                        <h2 class="h2">Brunon Woźniak</h2>
+                        <h2 class="h2 hero__kicker">Adwokat</h2>
+                        <h2 class="h2 hero__name">Brunon Woźniak</h2>
+
+                        <div class="motto motto--inline" aria-label="Motto kancelarii">
                             <p class="motto__latin">
                                 <span class="motto__quote">“</span>
                                 Advocatus non accusat
                                 <span class="motto__quote">”</span>
                             </p>
-                            <p class="motto__pl">
-                                Adwokat nie ocenia
-                            </p>
+                            <p class="motto__pl">Adwokat nie ocenia</p>
+                        </div>
                     </div>
+
                     <div class="two-col__media">
-                        <img src="assets/img/main-page.jpeg" alt="Siedziba kancelarii" class="two-col__image" />
+                        <img src="assets/img/main-page.jpeg" alt="Siedziba kancelarii"
+                            class="two-col__image img-soft" />
                     </div>
                 </div>
 
-                <div class="carousel" data-carousel>
+                <!-- SERVICES CAROUSEL -->
+                <div class="carousel" data-carousel aria-label="Zakres usług">
                     <div class="carousel__viewport">
                         <div class="carousel__track" data-carousel-track>
                             <article class="card carousel__slide">
                                 <h3 class="card__title">PRAWO CYWILNE</h3>
-                                <ul>
-                                    <li>sprawy o zapłatę</li>
-                                    <li>niewykonanie lub nienależyte wykonanie umowy</li>
-                                    <li>wezwania do zapłaty</li>
-                                    <li>analiza i sporządzanie umów</li>
-                                    <li>postępowanie egzekucyjne</li>
-                                </ul>
+                                <div class="carousel-points" aria-label="Zakres: prawo cywilne">
+                                    <span>sprawy o zapłatę</span>
+                                    <span>niewykonanie lub nienależyte wykonanie umowy</span>
+                                    <span>wezwania do zapłaty</span>
+                                    <span>analiza i sporządzanie umów</span>
+                                    <span>postępowanie egzekucyjne</span>
+                                </div>
                             </article>
 
                             <article class="card carousel__slide">
                                 <h3 class="card__title">PRAWO NIERUCHOMOŚCI</h3>
-                                <ul>
-                                    <li>zniesienie współwłasności</li>
-                                    <li>służebność drogi koniecznej</li>
-                                    <li>obsługa prawna w zakresie nieruchomości</li>
-                                    <li>sporządzanie i analiza umów, m.in.: sprzedaży, najmu, dzierżawy, użyczenia</li>
-                                    <li>analiza stanu prawnego nieruchomości</li>
-                                </ul>
+                                <div class="carousel-points" aria-label="Zakres: prawo nieruchomości">
+                                    <span>zniesienie współwłasności</span>
+                                    <span>służebność drogi koniecznej</span>
+                                    <span>obsługa prawna w zakresie nieruchomości</span>
+                                    <span>sporządzanie i analiza umów: sprzedaży, najmu, dzierżawy, użyczenia</span>
+                                    <span>analiza stanu prawnego nieruchomości</span>
+                                </div>
                             </article>
 
                             <article class="card carousel__slide">
                                 <h3 class="card__title">PRAWO RODZINNE</h3>
-                                <ul>
-                                    <li>rozwód</li>
-                                    <li>podział majątku</li>
-                                    <li>władza rodzicielska</li>
-                                    <li>ustalenie kontaktów z dzieckiem</li>
-                                    <li>alimenty</li>
-                                </ul>
+                                <div class="carousel-points" aria-label="Zakres: prawo rodzinne">
+                                    <span>rozwód</span>
+                                    <span>podział majątku</span>
+                                    <span>władza rodzicielska</span>
+                                    <span>ustalenie kontaktów z dzieckiem</span>
+                                    <span>alimenty</span>
+                                </div>
                             </article>
 
                             <article class="card carousel__slide">
                                 <h3 class="card__title">PRAWO KARNE</h3>
-                                <ul>
-                                    <li>reprezentacja podejrzanych i oskarżonych</li>
-                                    <li>pomoc pokrzywdzonym</li>
-                                    <li>sprawy karnoskarbowe</li>
-                                    <li>reprezentacja przed organami ścigania oraz przed sądem</li>
-                                    <li>kontakt z klientem w zakładzie karnym lub areszcie śledczym</li>
-                                </ul>
+                                <div class="carousel-points" aria-label="Zakres: prawo karne">
+                                    <span>reprezentacja podejrzanych i oskarżonych</span>
+                                    <span>pomoc pokrzywdzonym</span>
+                                    <span>sprawy karnoskarbowe</span>
+                                    <span>reprezentacja przed organami ścigania oraz przed sądem</span>
+                                    <span>kontakt z klientem w zakładzie karnym lub areszcie śledczym</span>
+                                </div>
                             </article>
 
                             <article class="card carousel__slide">
                                 <h3 class="card__title">PRAWO KARNE WYKONAWCZE</h3>
-                                <ul>
-                                    <li>dozór elektroniczny</li>
-                                    <li>odroczenie wykonania kary</li>
-                                    <li>przerwa w wykonywaniu kary</li>
-                                    <li>warunkowe przedterminowe zwolnienie</li>
-                                    <li>zamiana kary</li>
-                                </ul>
+                                <div class="carousel-points" aria-label="Zakres: prawo karne wykonawcze">
+                                    <span>dozór elektroniczny</span>
+                                    <span>odroczenie wykonania kary</span>
+                                    <span>przerwa w wykonywaniu kary</span>
+                                    <span>warunkowe przedterminowe zwolnienie</span>
+                                    <span>zamiana kary</span>
+                                </div>
                             </article>
 
                             <article class="card carousel__slide">
                                 <h3 class="card__title">PRAWO PRACY I UBEZPIECZEŃ SPOŁECZNYCH</h3>
-                                <ul>
-                                    <li>sprawy przeciwko organom rentowym: ZUS, KRUS</li>
-                                    <li>ustalenie istnienia stosunku pracy</li>
-                                    <li>sprawy o wypowiedzenie lub rozwiązanie umowy o pracę</li>
-                                    <li>wynagrodzenia i inne świadczenia ze stosunku pracy</li>
-                                    <li>zdarzenia związane z wypadkami przy pracy</li>
-                                </ul>
+                                <div class="carousel-points" aria-label="Zakres: prawo pracy i ubezpieczeń">
+                                    <span>sprawy przeciwko organom rentowym: ZUS, KRUS</span>
+                                    <span>ustalenie istnienia stosunku pracy</span>
+                                    <span>wypowiedzenie lub rozwiązanie umowy o pracę</span>
+                                    <span>wynagrodzenia i inne świadczenia ze stosunku pracy</span>
+                                    <span>zdarzenia związane z wypadkami przy pracy</span>
+                                </div>
                             </article>
 
                             <article class="card carousel__slide">
                                 <h3 class="card__title">OBSŁUGA PRZEDSIĘBIORCÓW</h3>
-                                <ul>
-                                    <li>bieżąca obsługa prawna przedsiębiorców</li>
-                                    <li>analiza i sporządzanie regulaminów, umów, uchwał</li>
-                                    <li>obsługa spółek oraz udział w posiedzeniach</li>
-                                    <li>sprawy sądowe z kontrahentami, pracownikami</li>
-                                    <li>windykacja należności</li>
-                                </ul>
+                                <div class="carousel-points" aria-label="Zakres: obsługa przedsiębiorców">
+                                    <span>bieżąca obsługa prawna przedsiębiorców</span>
+                                    <span>analiza i sporządzanie regulaminów, umów, uchwał</span>
+                                    <span>obsługa spółek oraz udział w posiedzeniach</span>
+                                    <span>sprawy sądowe z kontrahentami, pracownikami</span>
+                                    <span>windykacja należności</span>
+                                </div>
                             </article>
 
                             <article class="card carousel__slide">
                                 <h3 class="card__title">SPADKI I TESTAMENTY</h3>
-                                <ul>
-                                    <li>stwierdzenie nabycia spadku</li>
-                                    <li>dział spadku</li>
-                                    <li>zachowek</li>
-                                    <li>niegodność dziedziczenia</li>
-                                    <li>wydziedziczenie</li>
-                                </ul>
+                                <div class="carousel-points" aria-label="Zakres: spadki i testamenty">
+                                    <span>stwierdzenie nabycia spadku</span>
+                                    <span>dział spadku</span>
+                                    <span>zachowek</span>
+                                    <span>niegodność dziedziczenia</span>
+                                    <span>wydziedziczenie</span>
+                                </div>
                             </article>
 
                             <article class="card carousel__slide">
                                 <h3 class="card__title">PRAWO ADMINISTRACYJNE</h3>
-                                <ul>
-                                    <li>postępowanie przed organami</li>
-                                    <li>rozprawy administracyjne</li>
-                                    <li>postępowanie przed WSA oraz NSA</li>
-                                    <li>sprawy związane z nieruchomościami</li>
-                                    <li>sprawy budowlane</li>
-                                </ul>
+                                <div class="carousel-points" aria-label="Zakres: prawo administracyjne">
+                                    <span>postępowanie przed organami</span>
+                                    <span>rozprawy administracyjne</span>
+                                    <span>postępowanie przed WSA oraz NSA</span>
+                                    <span>sprawy związane z nieruchomościami</span>
+                                    <span>sprawy budowlane</span>
+                                </div>
                             </article>
 
                             <article class="card carousel__slide">
                                 <h3 class="card__title">ODSZKODOWANIA</h3>
-                                <ul>
-                                    <li>szkoda na osobie lub mieniu</li>
-                                    <li>sprawy przeciwko ubezpieczycielom</li>
-                                    <li>zadośćuczynienie za krzywdę</li>
-                                    <li>sprawy o błąd medyczny</li>
-                                    <li>wypadki komunikacyjne</li>
-                                </ul>
+                                <div class="carousel-points" aria-label="Zakres: odszkodowania">
+                                    <span>szkoda na osobie lub mieniu</span>
+                                    <span>sprawy przeciwko ubezpieczycielom</span>
+                                    <span>zadośćuczynienie za krzywdę</span>
+                                    <span>sprawy o błąd medyczny</span>
+                                    <span>wypadki komunikacyjne</span>
+                                </div>
                             </article>
                         </div>
 
@@ -164,55 +169,59 @@
                     <div class="carousel__dots" data-carousel-dots aria-label="Nawigacja karuzeli"></div>
                 </div>
 
-                <section class="about-hero" aria-label="O mnie">
+                <!-- ABOUT HERO -->
+                <section class="about-hero about-hero--home" aria-label="O mnie">
                     <div class="about-hero__grid">
-                      <figure class="about-hero__media">
-                        <img src="assets/img/main-about.jpg" alt="O mnie" class="about-hero__photo" />
-                      </figure>
-                  
-                      <div class="about-hero__content">
-                        <header class="about-hero__header">
-                          <h1 class="about-hero__title">Adwokat Brunon Woźniak</h1>
-                          <p class="about-hero__lead">
-                            Skuteczna reprezentacja w sporach sądowych oparta na analizie, precyzyjnej argumentacji i spokojnym prowadzeniu sprawy.
-                          </p>
-                        </header>
-                  
-                        <div class="about-hero__body">
-                          <p class="about-hero__text">
-                            Jestem adwokatem łączącym solidne polskie wykształcenie prawnicze z międzynarodową perspektywą.
-                            Studia ukończyłem na Uniwersytecie Wrocławskim oraz na włoskim – Università degli Studi di Milano.
-                            Dzięki temu w praktyce wykorzystuję szerokie horyzonty i nowoczesne podejście do prawa.
-                          </p>
-                  
-                          <p class="about-hero__text">
-                            Specjalizuję się w kompleksowej obsłudze sporów sądowych. Przygotowuję precyzyjne pisma procesowe i
-                            reprezentuję klientów przed sądami wszystkich instancji. Moim priorytetem jest skuteczność osiągana dzięki
-                            rzetelnej analizie i konsekwencji na sali rozpraw.
-                          </p>
-                  
-                          <h2 class="about-hero__subtitle">W czym mogę pomóc</h2>
-                  
-                          <ul class="about-hero__points">
-                            <li><strong>Strategia procesowa:</strong> przygotowuję pisma, które celnie punktują argumentację strony przeciwnej.</li>
-                            <li><strong>Reprezentacja:</strong> z pełnym zaangażowaniem występuję w Twoim imieniu na rozprawach, dbając o Twój interes.</li>
-                            <li><strong>Doświadczenie:</strong> łączę wiedzę zdobytą na dwóch europejskich uczelniach z praktyką w skutecznym prowadzeniu spraw.</li>
-                          </ul>
-            
+                        <figure class="about-hero__media">
+                            <img src="assets/img/main-about.jpg" alt="O mnie" class="about-hero__photo img-soft" />
+                        </figure>
+
+                        <div class="about-hero__content">
+                            <header class="about-hero__header">
+                                <h1 class="about-hero__title">Adwokat Brunon Woźniak</h1>
+                                <p class="about-hero__lead">
+                                    Skuteczna reprezentacja w sporach sądowych oparta na analizie, precyzyjnej
+                                    argumentacji i spokojnym prowadzeniu sprawy.
+                                </p>
+                            </header>
+
+                            <div class="about-hero__body">
+                                <p class="about-hero__text">
+                                    Jestem adwokatem łączącym solidne polskie wykształcenie prawnicze z międzynarodową
+                                    perspektywą.
+                                    Studia ukończyłem na Uniwersytecie Wrocławskim oraz na włoskim – Università degli
+                                    Studi di Milano.
+                                    Dzięki temu w praktyce wykorzystuję szerokie horyzonty i nowoczesne podejście do
+                                    prawa.
+                                </p>
+
+                                <p class="about-hero__text">
+                                    Specjalizuję się w kompleksowej obsłudze sporów sądowych. Przygotowuję precyzyjne
+                                    pisma procesowe i
+                                    reprezentuję klientów przed sądami wszystkich instancji. Moim priorytetem jest
+                                    skuteczność osiągana dzięki
+                                    rzetelnej analizie i konsekwencji na sali rozpraw.
+                                </p>
+
+                                <h2 class="about-hero__subtitle">W czym mogę pomóc</h2>
+
+                                <ul class="about-hero__points">
+                                    <li><strong>Strategia procesowa:</strong> przygotowuję pisma, które celnie punktują
+                                        argumentację strony przeciwnej.</li>
+                                    <li><strong>Reprezentacja:</strong> z pełnym zaangażowaniem występuję w Twoim
+                                        imieniu na rozprawach, dbając o Twój interes.</li>
+                                    <li><strong>Doświadczenie:</strong> łączę wiedzę zdobytą na dwóch europejskich
+                                        uczelniach z praktyką w skutecznym prowadzeniu spraw.</li>
+                                </ul>
+                            </div>
                         </div>
-                      </div>
                     </div>
+
                     <div class="about-hero__actions">
-                        <a class="about-hero__btn" href="kontakt.html">Umów konsultację</a>
-                        <p class="about-hero__meta">
-                          Odpowiedź zwykle w 24h • Poufność i jasne zasady współpracy
-                        </p>
-                      </div>
-                      
-                  </section>
-                  
-
-
+                        <a class="about-hero__btn" href="contact.html">Umów konsultację</a>
+                        <p class="about-hero__meta">Odpowiedź zwykle w 24h • Poufność i jasne zasady współpracy</p>
+                    </div>
+                </section>
             </div>
         </section>
     </main>
