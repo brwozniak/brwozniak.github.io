@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Kontakt | Kancelaria Brunon Woźniak</title>
+
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+</head>
+
+<body>
+    <div data-include="partials/header.html"></div>
+
+    <main>
+        <section class="section section--hero">
+            <div class="container contact">
+                <div class="contact__panel">
+                    <div class="contact__grid">
+                        <!-- LEFT -->
+                        <aside class="contact__info">
+                            <h1 class="contact__title">Kontakt</h1>
+
+                            <div class="contact__block">
+                                <p class="contact__line contact__line--strong">Kancelaria Adwokacka</p>
+                                <p class="contact__line">Adwokat Brunon Woźniak</p>
+                            </div>
+
+                            <div class="contact__block">
+                                <p class="contact__label">E-mail</p>
+                                <a class="contact__value"
+                                    href="mailto:kancelaria@wozniakadwokat.com">kancelaria@wozniakadwokat.com</a>
+                            </div>
+
+                            <div class="contact__block">
+                                <p class="contact__label">Telefon</p>
+                                <a class="contact__value" href="tel:+486666894102">+48 666 894 102</a>
+                            </div>
+                        </aside>
+
+                        <!-- RIGHT -->
+                        <form class="contact__form" id="contactForm" action="https://formspree.io/f/XXXXYYYY"
+                            method="POST" novalidate>
+                            <div class="form__group">
+                                <label for="name">Imię i nazwisko</label>
+                                <input type="text" id="name" name="name" autocomplete="name" required />
+                            </div>
+
+                            <div class="form__group">
+                                <label for="email">Adres e-mail</label>
+                                <input type="email" id="email" name="email" autocomplete="email" required />
+                            </div>
+
+                            <div class="form__group">
+                                <label for="message">Wiadomość</label>
+                                <textarea id="message" name="message" rows="6" required></textarea>
+                            </div>
+
+                            <div class="form__consent">
+                                <input type="checkbox" id="consent" />
+                                <label for="consent">Wyrażam zgodę na przetwarzanie danych osobowych</label>
+                            </div>
+
+                            <button type="submit" class="btn-primary btn-primary--full">
+                                Wyślij wiadomość
+                            </button>
+
+                            <p class="form__hint">
+                                Odpowiedź zwykle w 24h. Twoje dane są traktowane poufnie.
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <div data-include="partials/footer.html"></div>
+
+    <script src="js/main.js" defer></script>
+    <script src="js/contact.js" defer></script>
+</body>
+
+</html>
