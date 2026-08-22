@@ -1,20 +1,18 @@
 :root {
-    --bg: #e7e4dc;
-    --text: #1b1f1d;
-    --text-soft: rgba(27, 31, 29, 0.72);
-    --text-muted: rgba(27, 31, 29, 0.58);
+    --bg: #E3E1DB;
+    --text: #000000;
+    --text-soft: rgba(0, 0, 0, 0.72);
+    --text-muted: rgba(0, 0, 0, 0.58);
 
-    --green-1: #003f22;
-    --surface: #f8f7f2;
-    --surface-soft: rgba(248, 247, 242, 0.76);
+    --green-1: #003F22;
+    --surface: #FFFFFF;
+    --surface-soft: rgba(255, 255, 255, 0.94);
     --surface-muted: rgba(227, 225, 219, 0.48);
 
-    --gold-1: #c9a24a;
-    --gold-2: #e0c27a;
     --danger: #b00020;
 
-    --border: rgba(0, 63, 34, 0.18);
-    --border-strong: rgba(0, 63, 34, 0.28);
+    --border: rgba(255, 255, 255, 0.86);
+    --border-strong: rgba(255, 255, 255, 0.96);
 
     --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.06);
     --shadow: 0 14px 34px rgba(0, 0, 0, 0.08);
@@ -36,5 +34,6 @@
     --space-7: 72px;
 
     --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
-    --focus: 0 0 0 3px rgba(201, 162, 74, 0.35);
+    --font-text: "Avenir Next Condensed", "Avenir Next", "Arial Narrow", Arial, sans-serif;
+    --focus: 0 0 0 3px rgba(0, 63, 34, 0.26);
 }

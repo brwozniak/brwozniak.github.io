@@ -4,32 +4,8 @@
     margin-inline: var(--page-gutter);
 }
 
-:root {
-    --bottom-fade: clamp(80px, 12vh, 140px);
-    --bottom-gap: var(--space-5);
-}
-
 main {
     position: relative;
-    padding-bottom: calc(var(--bottom-fade) + var(--bottom-gap));
-}
-
-main::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: var(--bottom-fade);
-    pointer-events: none;
-    z-index: 0;
-    background: linear-gradient(
-        to top,
-        rgba(0, 63, 34, 1) 0%,
-        rgba(0, 63, 34, 0.84) 24%,
-        rgba(0, 63, 34, 0.42) 62%,
-        rgba(0, 63, 34, 0) 100%
-    );
 }
 
 main>* {
