@@ -8,7 +8,9 @@ body {
 }
 
 html {
+    background: var(--green-1);
     -webkit-text-size-adjust: 100%;
+    overscroll-behavior-y: none;
     scroll-behavior: smooth;
 }
 
@@ -21,6 +23,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    overscroll-behavior-y: none;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
 }
