@@ -1519,11 +1519,6 @@
         font-size: 18px;
     }
 
-    .contact {
-        padding-top: var(--space-4);
-        padding-bottom: var(--space-4);
-    }
-
     .contact__panel {
         padding: 0;
     }

@@ -1,7 +1,7 @@
 const SCRIPTS = {
-    carousel: "/js/carousel.js?v=20260822-44",
-    include: "/js/include.js?v=20260822-44",
-    nav: "/js/nav.js?v=20260822-44",
+    carousel: "/js/carousel.js?v=20260822-45",
+    include: "/js/include.js?v=20260822-45",
+    nav: "/js/nav.js?v=20260822-45",
 };
 
 function loadScript(src) {
