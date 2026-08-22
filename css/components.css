@@ -23,8 +23,8 @@
 }
 
 .site-header .container--header {
-    width: auto;
-    margin-inline: var(--page-gutter);
+    width: min(var(--container), calc(100% - 2 * var(--page-gutter)));
+    margin-inline: auto;
     padding-inline: 0;
 }
 
@@ -563,7 +563,7 @@
 
 .about-page__intro,
 .about-page__section {
-    width: min(860px, 100%);
+    width: 100%;
 }
 
 .about-page__title {

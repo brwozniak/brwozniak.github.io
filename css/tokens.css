@@ -22,7 +22,7 @@
     --radius-sm: 6px;
     --radius-pill: 999px;
 
-    --container: none;
+    --container: 1060px;
     --page-gutter: clamp(16px, 5vw, 80px);
 
     --space-1: 8px;

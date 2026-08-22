@@ -1,7 +1,7 @@
 .container {
-    width: auto;
-    max-width: var(--container);
-    margin-inline: var(--page-gutter);
+    width: min(var(--container), calc(100% - 2 * var(--page-gutter)));
+    max-width: none;
+    margin-inline: auto;
 }
 
 main {
