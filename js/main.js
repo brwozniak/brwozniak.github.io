@@ -1,31 +1,51 @@
-(async function boot() {
-    async function loadScript(src) {
-        return new Promise((resolve, reject) => {
-            const s = document.createElement("script");
-            s.src = src;
-            s.defer = true;
-            s.onload = resolve;
-            s.onerror = reject;
-            document.head.appendChild(s);
-        });
-    }
+const SCRIPTS = {
+    carousel: "js/carousel.js",
+    include: "js/include.js",
+    nav: "js/nav.js",
+};
 
-    // Load HTML partials (header/footer)
-    await loadScript("js/include.js");
-    await window.__includePartials();
+function loadScript(src) {
+    return new Promise((resolve, reject) => {
+        const script = document.createElement("script");
 
-    // Initialize navigation interactions (dropdown, mobile menu)
-    await loadScript("js/nav.js");
-    window.__initNav?.();
+        script.src = src;
+        script.onload = resolve;
+        script.onerror = reject;
 
-    // Update year placeholders
-    document.querySelectorAll("[data-year]").forEach((el) => {
-        el.textContent = String(new Date().getFullYear());
+        document.head.appendChild(script);
     });
+}
 
-    // Initialize carousel only if present
-    if (document.querySelector("[data-carousel]")) {
-        await loadScript("js/carousel.js");
-        window.__initCarousel?.();
-    }
+function updateCurrentYear() {
+    const currentYear = String(new Date().getFullYear());
+
+    document.querySelectorAll("[data-year]").forEach((element) => {
+        element.textContent = currentYear;
+    });
+}
+
+async function loadPartials() {
+    await loadScript(SCRIPTS.include);
+    await window.__includePartials?.();
+}
+
+async function initNavigation() {
+    await loadScript(SCRIPTS.nav);
+    window.__initNav?.();
+}
+
+async function initCarouselIfNeeded() {
+    if (!document.querySelector("[data-carousel]")) return;
+
+    await loadScript(SCRIPTS.carousel);
+    window.__initCarousel?.();
+}
+
+(async function boot() {
+    await loadPartials();
+    await initNavigation();
+
+    updateCurrentYear();
+
+    await initCarouselIfNeeded();
 })();
