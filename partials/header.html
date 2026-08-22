@@ -1,7 +1,7 @@
 <header class="site-header">
     <div class="container container--header header__inner">
         <a class="brand" href="/" aria-label="Strona główna">
-            <img class="brand__logo" src="assets/img/logo.png" alt="Kancelaria Adwokacka Brunon Woźniak" />
+            <img class="brand__logo" src="/assets/img/logo.png" alt="Kancelaria Adwokacka Brunon Woźniak" />
         </a>
 
         <button class="nav-toggle" type="button" data-nav-toggle aria-label="Otwórz menu" aria-expanded="false">
@@ -13,15 +13,32 @@
         <nav class="nav" data-nav>
             <ul class="nav__list">
                 <li class="nav__item">
-                    <a class="nav__link" href="about.html">O kancelarii</a>
+                    <a class="nav__link" href="/about.html">O kancelarii</a>
+                </li>
+
+                <li class="nav__item nav__item--has-dropdown" data-dropdown>
+                    <button class="nav__link nav__link--button" type="button" data-dropdown-toggle
+                        aria-expanded="false">
+                        Usługi
+                        <span class="chev" aria-hidden="true">▾</span>
+                    </button>
+
+                    <ul class="dropdown" data-dropdown-menu>
+                        <li><a class="dropdown__link" href="/uslugi/prawo-cywilne.html">Prawo Cywilne</a></li>
+                        <li><a class="dropdown__link" href="/uslugi/prawo-nieruchomosci.html">Prawo Nieruchomości</a></li>
+                        <li><a class="dropdown__link" href="/uslugi/prawo-rodzinne.html">Prawo Rodzinne</a></li>
+                        <li><a class="dropdown__link" href="/uslugi/prawo-karne.html">Prawo Karne</a></li>
+                        <li><a class="dropdown__link" href="/uslugi/prawo-karne-wykonawcze.html">Prawo Karne Wykonawcze</a></li>
+                        <li><a class="dropdown__link" href="/uslugi/prawo-pracy-i-ubezpieczen-spolecznych.html">Prawo Pracy i Ubezpieczeń Społecznych</a></li>
+                        <li><a class="dropdown__link" href="/uslugi/obsluga-przedsiebiorcow.html">Obsługa Przedsiębiorców</a></li>
+                        <li><a class="dropdown__link" href="/uslugi/spadki-i-testamenty.html">Spadki i Testamenty</a></li>
+                        <li><a class="dropdown__link" href="/uslugi/prawo-administracyjne.html">Prawo Administracyjne</a></li>
+                        <li><a class="dropdown__link" href="/uslugi/odszkodowania.html">Odszkodowania</a></li>
+                    </ul>
                 </li>
 
                 <li class="nav__item">
-                    <a class="nav__link" href="uslugi.html">Usługi</a>
-                </li>
-
-                <li class="nav__item">
-                    <a class="nav__link" href="contact.html">Kontakt</a>
+                    <a class="nav__link" href="/contact.html">Kontakt</a>
                 </li>
             </ul>
         </nav>
