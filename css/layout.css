@@ -1,6 +1,7 @@
 .container {
-    width: min(var(--container), calc(100% - 2 * var(--space-4)));
-    margin-inline: auto;
+    width: auto;
+    max-width: var(--container);
+    margin-inline: var(--page-gutter);
 }
 
 :root {
@@ -43,7 +44,7 @@ main>* {
 .two-col {
     display: grid;
     gap: clamp(var(--space-4), 5vw, var(--space-7));
-    grid-template-columns: 1.1fr 0.9fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: center;
     margin-bottom: var(--space-6);
 }
@@ -55,10 +56,6 @@ main>* {
 }
 
 @media (max-width: 640px) {
-    .container {
-        width: min(var(--container), calc(100% - 2 * var(--space-3)));
-    }
-
     .section {
         padding: var(--space-5) 0;
     }
