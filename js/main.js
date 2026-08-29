@@ -1,7 +1,8 @@
 const SCRIPTS = {
-    carousel: "/js/carousel.js?v=20260822-45",
-    include: "/js/include.js?v=20260822-45",
-    nav: "/js/nav.js?v=20260822-45",
+    carousel: "/js/carousel.js?v=20260829-4",
+    include: "/js/include.js?v=20260829-4",
+    nav: "/js/nav.js?v=20260829-4",
+    typography: "/js/typography.js?v=20260829-4",
 };
 
 function loadScript(src) {
@@ -41,11 +42,17 @@ async function initCarouselIfNeeded() {
     window.__initCarousel?.();
 }
 
+async function initTypography() {
+    await loadScript(SCRIPTS.typography);
+    window.__initTypography?.();
+}
+
 (async function boot() {
     await loadPartials();
     await initNavigation();
 
     updateCurrentYear();
+    await initTypography();
 
     await initCarouselIfNeeded();
 })();
