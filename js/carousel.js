@@ -10,7 +10,8 @@ function initCarousel() {
 
     if (!track || !viewport) return;
 
-    const TRANSITION = "transform 420ms cubic-bezier(0.22, 1, 0.36, 1)";
+    const TRANSITION_MS = 420;
+    const TRANSITION = `transform ${TRANSITION_MS}ms cubic-bezier(0.22, 1, 0.36, 1)`;
     const AUTOPLAY_MS = 5000;
 
     // Prevent double initialization (e.g., when include script runs twice)
@@ -33,6 +34,7 @@ function initCarousel() {
     // Index: 1..realCount (0 = lastClone, realCount+1 = firstClone)
     let index = 1;
     let timerId = null;
+    let transitionTimerId = null;
     let isAnimating = false;
 
     function slideWidth() {
@@ -49,7 +51,7 @@ function initCarousel() {
 
     function updateDots() {
         if (!dotsWrap) return;
-        const realIndex = index - 1; // 0..realCount-1
+        const realIndex = (index - 1 + realCount) % realCount;
         Array.from(dotsWrap.children).forEach((d, i) =>
             d.classList.toggle("is-active", i === realIndex)
         );
@@ -76,7 +78,7 @@ function initCarousel() {
 
     function startAutoplay() {
         stopAutoplay();
-        timerId = setInterval(() => goNext(true), AUTOPLAY_MS);
+        timerId = setInterval(() => goNext(false), AUTOPLAY_MS);
     }
 
     function restartAutoplay() {
@@ -85,18 +87,17 @@ function initCarousel() {
 
     function goTo(nextIndex, animated, userAction) {
         if (isAnimating) return;
-        isAnimating = !!animated;
-
         if (userAction) restartAutoplay();
+        if (nextIndex === index) return;
+
+        isAnimating = !!animated;
 
         setTransition(!!animated);
         index = nextIndex;
         applyTransform();
         updateDots();
 
-        if (!animated) {
-            isAnimating = false;
-        }
+        if (animated) transitionTimerId = setTimeout(finishTransition, TRANSITION_MS + 100);
     }
 
     function goNext(userAction) {
@@ -108,7 +109,9 @@ function initCarousel() {
     }
 
     // Edge fix: after animating to a clone, jump to the matching real slide without animation
-    track.addEventListener("transitionend", () => {
+    function finishTransition() {
+        clearTimeout(transitionTimerId);
+        transitionTimerId = null;
         isAnimating = false;
 
         if (index === 0) {
@@ -124,6 +127,14 @@ function initCarousel() {
         }
 
         updateDots();
+    }
+
+    ["transitionend", "transitioncancel"].forEach((type) => {
+        track.addEventListener(type, (event) => {
+            if (event.target === track && event.propertyName === "transform" && isAnimating) {
+                finishTransition();
+            }
+        });
     });
 
     // Buttons
@@ -139,6 +150,7 @@ function initCarousel() {
 
     // Resize: keep the same slide visible, without animation
     window.addEventListener("resize", () => {
+        finishTransition();
         setTransition(false);
         applyTransform();
         requestAnimationFrame(() => setTransition(true));

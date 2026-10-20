@@ -25,6 +25,7 @@ function initServiceCards() {
 
         lastTrigger = card;
         body.innerHTML = detail.innerHTML;
+        window.__applyTypography?.(body);
         modal.classList.add("is-open");
         modal.setAttribute("aria-hidden", "false");
         document.documentElement.classList.add("is-modal-locked");
