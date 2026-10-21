@@ -1,101 +1,211 @@
-const CONTACT_FORM_ID = "contactForm";
-const CONSENT_ID = "consent";
-const ERROR_CLASS = "is-error";
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+(() => {
+    // Web3Forms' shared public hCaptcha sitekey for the free plan; this is not a secret.
+    const CAPTCHA_SITEKEY = "50b2fe65-b00b-4b9e-ad62-3ba471098be2";
+    const TIMEOUT_MS = 15000;
+    const UNAVAILABLE_MESSAGE = "Formularz jest chwilowo niedostępny. Prosimy o kontakt e-mailem lub telefonicznie.";
 
-function setFieldError(field, hasError) {
-    field.classList.toggle(ERROR_CLASS, hasError);
-}
+    function initContactForm() {
+        const form = document.getElementById("contactForm");
+        if (!form) return;
 
-function isFilled(field) {
-    return field.value.trim().length > 0;
-}
+        const fields = document.getElementById("contactFields");
+        const status = document.getElementById("formStatus");
+        const fallback = document.getElementById("formFallback");
+        const captcha = document.getElementById("contactCaptcha");
+        const captchaStatus = document.getElementById("captchaStatus");
+        const submit = form.querySelector('button[type="submit"]');
+        const controls = ["name", "email", "message", "consent"].map((name) => form.elements.namedItem(name));
+        const accessKey = form.elements.namedItem("access_key").value.trim();
+        const configured = Boolean(accessKey && !/^YOUR_/i.test(accessKey));
+        let submitting = false;
+        let captchaReady = false;
+        let captchaToken = "";
+        let widgetId = null;
+        let captchaTimer = null;
 
-function validateRequiredFields(fields) {
-    let isValid = true;
-
-    fields.forEach((field) => {
-        const hasError = !isFilled(field);
-        setFieldError(field, hasError);
-
-        if (hasError) {
-            isValid = false;
+        function showStatus(message, state = "error") {
+            status.textContent = message;
+            status.dataset.state = state;
+            status.hidden = !message;
+            fallback.hidden = !message || state === "success";
         }
-    });
 
-    return isValid;
-}
+        function showCaptchaStatus(message, state = "error") {
+            captchaStatus.textContent = message;
+            captchaStatus.dataset.state = state;
+            captchaStatus.hidden = !message;
+        }
 
-function validateEmail(emailField) {
-    const hasError = !EMAIL_PATTERN.test(emailField.value.trim());
-    setFieldError(emailField, hasError);
+        function updateSubmitState() {
+            fields.disabled = !configured || submitting;
+            submit.disabled = !configured || !captchaReady || submitting;
+            submit.textContent = submitting ? "Wysyłanie…" : "Wyślij wiadomość";
+            form.setAttribute("aria-busy", String(submitting));
+        }
 
-    return !hasError;
-}
+        function setFieldError(field, message) {
+            const error = document.getElementById(`${field.id}-error`);
+            error.textContent = message;
+            error.hidden = !message;
+            field.setAttribute("aria-invalid", String(Boolean(message)));
+            field.classList.toggle("is-error", Boolean(message));
+            field.closest(".form__consent")?.classList.toggle("is-error", Boolean(message));
+        }
 
-function validateConsent(consentField) {
-    const consentWrapper = consentField.closest(".form__consent");
-    const hasError = !consentField.checked;
+        function fieldError(field) {
+            if (field.type === "checkbox") return field.checked ? "" : "Potwierdź zgodę na przetwarzanie danych.";
+            if (!field.value.trim()) return "Uzupełnij to pole.";
+            if (field.type === "email" && field.validity.typeMismatch) return "Podaj poprawny adres e-mail.";
+            if (field.maxLength > 0 && field.value.length > field.maxLength) return "Wpisany tekst jest zbyt długi.";
+            return "";
+        }
 
-    consentWrapper?.classList.toggle(ERROR_CLASS, hasError);
+        function validateFields() {
+            let firstInvalid = null;
+            controls.forEach((field) => {
+                const message = fieldError(field);
+                setFieldError(field, message);
+                if (message && !firstInvalid) firstInvalid = field;
+            });
+            firstInvalid?.focus();
+            return !firstInvalid;
+        }
 
-    return !hasError;
-}
+        controls.forEach((field) => {
+            field.addEventListener(field.type === "checkbox" ? "change" : "input", () => {
+                if (field.getAttribute("aria-invalid") === "true") setFieldError(field, fieldError(field));
+            });
+        });
 
-function getFormFields(form) {
-    return {
-        consent: document.getElementById(CONSENT_ID),
-        email: form.elements.namedItem("email"),
-        message: form.elements.namedItem("message"),
-        name: form.elements.namedItem("name"),
-    };
-}
+        function resetCaptcha() {
+            captchaToken = "";
+            if (widgetId === null) return;
+            try {
+                window.hcaptcha.reset(widgetId);
+            } catch {
+                captchaReady = false;
+                showCaptchaStatus("Weryfikacja antyspamowa jest niedostępna. Odśwież stronę lub skontaktuj się e-mailem.");
+            }
+        }
 
-function validateForm(form) {
-    const { consent, email, message, name } = getFormFields(form);
-    const requiredFields = [name, email, message].filter(Boolean);
+        function captchaFailed() {
+            clearTimeout(captchaTimer);
+            captchaReady = false;
+            captchaToken = "";
+            showCaptchaStatus("Nie udało się załadować weryfikacji antyspamowej. Odśwież stronę lub skontaktuj się e-mailem.");
+            updateSubmitState();
+        }
 
-    if (requiredFields.length < 3 || !email) return false;
+        window.onContactCaptchaLoad = () => {
+            clearTimeout(captchaTimer);
+            if (widgetId !== null) return;
+            try {
+                widgetId = window.hcaptcha.render(captcha, {
+                    sitekey: CAPTCHA_SITEKEY,
+                    hl: "pl",
+                    size: "compact",
+                    theme: "light",
+                    callback: (token) => {
+                        captchaToken = token;
+                        showCaptchaStatus("");
+                    },
+                    "expired-callback": () => {
+                        captchaToken = "";
+                        showCaptchaStatus("Weryfikacja wygasła. Potwierdź ją ponownie.");
+                    },
+                    "error-callback": () => {
+                        captchaToken = "";
+                        showCaptchaStatus("Weryfikacja nie powiodła się. Spróbuj ponownie zaznaczyć pole hCaptcha.");
+                    },
+                });
+                captchaReady = true;
+                showCaptchaStatus("");
+                updateSubmitState();
+            } catch {
+                captchaFailed();
+            }
+        };
 
-    const hasRequiredFields = validateRequiredFields(requiredFields);
-    const hasValidEmail = validateEmail(email);
-    const hasConsent = consent ? validateConsent(consent) : true;
+        form.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            if (submitting) return;
+            if (!configured) {
+                showStatus(UNAVAILABLE_MESSAGE, "notice");
+                return;
+            }
+            if (form.elements.namedItem("botcheck").checked) {
+                showStatus("Nie udało się wysłać wiadomości. Skontaktuj się z kancelarią e-mailem.");
+                return;
+            }
+            showStatus("");
+            if (!validateFields()) return;
 
-    return hasRequiredFields && hasValidEmail && hasConsent;
-}
+            if (!captchaReady || !captchaToken) {
+                showCaptchaStatus("Potwierdź weryfikację antyspamową przed wysłaniem wiadomości.");
+                captcha.querySelector("iframe")?.focus();
+                return;
+            }
 
-async function submitForm(form) {
-    const response = await fetch(form.action, {
-        method: "POST",
-        body: new FormData(form),
-        headers: {
-            Accept: "application/json",
-        },
-    });
+            // Read all fields before disabling the fieldset: disabled fields are excluded from FormData.
+            const data = new FormData(form);
+            data.set("access_key", accessKey);
+            controls.filter((field) => field.type !== "checkbox").forEach((field) => data.set(field.name, field.value.trim()));
+            data.set("h-captcha-response", captchaToken);
+            const controller = new AbortController();
+            const timeout = setTimeout(() => controller.abort(), TIMEOUT_MS);
+            submitting = true;
+            updateSubmitState();
 
-    return response.ok;
-}
+            try {
+                const response = await fetch(form.action, {
+                    method: "POST",
+                    body: data,
+                    headers: { Accept: "application/json" },
+                    signal: controller.signal,
+                });
+                let result = null;
+                try {
+                    result = await response.json();
+                } catch {
+                    // Rate limits and service outages can return HTML or an empty body.
+                }
+                if (!response.ok || result?.success !== true) {
+                    showStatus(UNAVAILABLE_MESSAGE);
+                    status.focus();
+                    return;
+                }
+                form.reset();
+                showStatus("Wiadomość została wysłana. Dziękujemy za kontakt.", "success");
+                status.focus();
+            } catch {
+                showStatus(UNAVAILABLE_MESSAGE);
+                status.focus();
+            } finally {
+                clearTimeout(timeout);
+                resetCaptcha();
+                submitting = false;
+                updateSubmitState();
+            }
+        });
 
-function initContactForm() {
-    const form = document.getElementById(CONTACT_FORM_ID);
-
-    if (!form) return;
-
-    form.addEventListener("submit", async (event) => {
-        event.preventDefault();
-
-        if (!validateForm(form)) return;
-
-        const isSubmitted = await submitForm(form).catch(() => false);
-
-        if (isSubmitted) {
-            form.reset();
-            alert("Wiadomość została wysłana. Skontaktuję się z Tobą wkrótce.");
+        updateSubmitState();
+        if (!configured) {
+            showStatus(UNAVAILABLE_MESSAGE, "notice");
             return;
         }
 
-        alert("Błąd wysyłki. Spróbuj ponownie później.");
-    });
-}
+        showStatus("");
+        captcha.hidden = false;
+        showCaptchaStatus("Ładowanie weryfikacji antyspamowej…", "loading");
+        const script = document.createElement("script");
+        script.src = "https://js.hcaptcha.com/1/api.js?onload=onContactCaptchaLoad&render=explicit&hl=pl&recaptchacompat=off";
+        script.async = true;
+        script.defer = true;
+        script.onerror = captchaFailed;
+        captchaTimer = setTimeout(captchaFailed, TIMEOUT_MS);
+        document.head.appendChild(script);
+    }
 
-document.addEventListener("DOMContentLoaded", initContactForm);
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initContactForm);
+    else initContactForm();
+})();

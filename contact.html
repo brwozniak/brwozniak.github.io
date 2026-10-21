@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/css/tokens.css?v=20261020-4" />
     <link rel="stylesheet" href="/css/base.css?v=20261020-4" />
     <link rel="stylesheet" href="/css/layout.css?v=20261020-4" />
-    <link rel="stylesheet" href="/css/components.css?v=20261020-4" />
+    <link rel="stylesheet" href="/css/components.css?v=20261020-6" />
 </head>
 
 <body>
@@ -37,41 +37,67 @@
 
                             <div class="contact__block">
                                 <p class="contact__label">Telefon</p>
-                                <a class="contact__value" href="tel:+486666894102">+48 666 894 102</a>
+                                <a class="contact__value" href="tel:+48666894102">+48 666 894 102</a>
                             </div>
                         </aside>
 
                         <!-- RIGHT -->
-                        <form class="contact__form" id="contactForm" action="https://formspree.io/f/XXXXYYYY"
-                            method="POST" novalidate>
-                            
-                            <input type="hidden" name="_subject"
+                        <form class="contact__form" id="contactForm" action="https://api.web3forms.com/submit"
+                            method="POST" novalidate aria-busy="false">
+                            <!-- Public Web3Forms key; recipient and required hCaptcha are configured in its dashboard. -->
+                            <input type="hidden" name="access_key" value="4c2452a9-abd2-467c-80ef-4cda1a01b37a" />
+                            <input type="hidden" name="subject"
                                 value="Formularz kontaktowy – Kancelaria Brunon Woźniak" />
-                            <input type="hidden" name="_template" value="table" />
+                            <input type="hidden" name="from_name" value="Strona kancelarii Brunona Woźniaka" />
+                            <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" hidden />
 
-                            <div class="form__group">
-                                <label for="name">Imię i nazwisko</label>
-                                <input type="text" id="name" name="name" autocomplete="name" required />
-                            </div>
+                            <p class="form__status" id="formStatus" role="status" aria-live="polite"
+                                aria-atomic="true" tabindex="-1">
+                                Formularz jest chwilowo niedostępny. Prosimy o kontakt e-mailem lub telefonicznie.
+                            </p>
+                            <p class="form__fallback" id="formFallback">
+                                <a href="mailto:kancelaria@wozniakadwokat.com">kancelaria@wozniakadwokat.com</a>
+                                <a href="tel:+48666894102">+48 666 894 102</a>
+                            </p>
 
-                            <div class="form__group">
-                                <label for="email">Adres e-mail</label>
-                                <input type="email" id="email" name="email" autocomplete="email" required />
-                            </div>
+                            <fieldset class="form__fields" id="contactFields" disabled>
+                                <legend class="visually-hidden">Wiadomość do kancelarii</legend>
 
-                            <div class="form__group">
-                                <label for="message">Wiadomość</label>
-                                <textarea id="message" name="message" rows="9" required></textarea>
-                            </div>
+                                <div class="form__group">
+                                    <label for="name">Imię i nazwisko</label>
+                                    <input type="text" id="name" name="name" autocomplete="name" maxlength="120"
+                                        aria-describedby="name-error" required />
+                                    <p class="form__error" id="name-error" hidden></p>
+                                </div>
 
-                            <div class="form__consent">
-                                <input type="checkbox" id="consent" />
-                                <label for="consent">Wyrażam zgodę na przetwarzanie danych osobowych</label>
-                            </div>
+                                <div class="form__group">
+                                    <label for="email">Adres e-mail</label>
+                                    <input type="email" id="email" name="email" autocomplete="email" maxlength="254"
+                                        aria-describedby="email-error" required />
+                                    <p class="form__error" id="email-error" hidden></p>
+                                </div>
 
-                            <button type="submit" class="btn-primary btn-primary--full">
-                                Wyślij wiadomość
-                            </button>
+                                <div class="form__group">
+                                    <label for="message">Wiadomość</label>
+                                    <textarea id="message" name="message" rows="9" maxlength="6000"
+                                        aria-describedby="message-error" required></textarea>
+                                    <p class="form__error" id="message-error" hidden></p>
+                                </div>
+
+                                <div class="form__consent">
+                                    <input type="checkbox" id="consent" name="consent" value="accepted"
+                                        aria-describedby="consent-error" required />
+                                    <label for="consent">Wyrażam zgodę na przetwarzanie danych osobowych</label>
+                                    <p class="form__error" id="consent-error" hidden></p>
+                                </div>
+
+                                <div class="form__captcha" id="contactCaptcha" hidden></div>
+                                <p class="form__captcha-status" id="captchaStatus" role="status" aria-live="polite" hidden></p>
+
+                                <button type="submit" class="btn-primary btn-primary--full" disabled>
+                                    Wyślij wiadomość
+                                </button>
+                            </fieldset>
 
                             <p class="form__hint">
                                 Odpowiedź zwykle w 24h. Twoje dane są traktowane poufnie.
@@ -87,7 +113,7 @@
     <div data-include="/partials/footer.html"></div>
 
     <script src="/js/main.js?v=20261020-4" defer></script>
-    <script src="/js/contact.js?v=20261020-4" defer></script>
+    <script src="/js/contact.js?v=20261020-7" defer></script>
 </body>
 
 </html>
